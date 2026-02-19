@@ -9,13 +9,15 @@ import java.util.UUID;
 public class Order {
     private final UUID id;
     private final Customer customer;
-    private final List<OrderItem> orderItemsList;
+    private final List<OrderItem> items;
     private final ShippingState shippingState;
+    private final OrderStatus status;
 
-    public Order(UUID id, Customer customer, List<OrderItem> orderItemsList, ShippingState shippingState, OrderStatus orderStatus) {
+    public Order(UUID id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
         this.id = id;
         this.customer = customer;
-        this.orderItemsList = orderItemsList;
+        this.items = items;
         this.shippingState = shippingState;
+        this.status = OrderStatus.COMPLETED;
     }
 }
