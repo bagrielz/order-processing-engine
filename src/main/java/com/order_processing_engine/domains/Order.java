@@ -11,13 +11,14 @@ public class Order {
     private final Customer customer;
     private final List<OrderItem> items;
     private final ShippingState shippingState;
-    private final OrderStatus status;
+
+    private OrderStatus status;
 
     public Order(UUID id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
         this.id = id;
         this.customer = customer;
         this.items = items;
         this.shippingState = shippingState;
-        this.status = OrderStatus.COMPLETED;
+        this.status = OrderStatus.CREATED;
     }
 }
