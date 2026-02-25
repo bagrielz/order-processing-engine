@@ -40,7 +40,7 @@ public class Order {
 
     public void changeStatusTo(OrderStatus next) {
         if (!status.canTransitionTo(next)) {
-            throw new IllegalStateException("");
+            throw new IllegalStateException("Transição inválida de " + status + " para " + next);
         }
 
         this.status = next;
