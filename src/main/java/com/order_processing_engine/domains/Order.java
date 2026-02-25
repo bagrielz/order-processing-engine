@@ -21,4 +21,28 @@ public class Order {
         this.shippingState = shippingState;
         this.status = OrderStatus.CREATED;
     }
+
+    public void validate() {
+        changeStatusTo(OrderStatus.VALIDATED);
+    }
+
+    public void calculate() {
+        changeStatusTo(OrderStatus.CALCULATED);
+    }
+
+    public void complete() {
+        changeStatusTo(OrderStatus.COMPLETED);
+    }
+
+    public void reject() {
+        changeStatusTo(OrderStatus.REJECTED);
+    }
+
+    public void changeStatusTo(OrderStatus next) {
+        if (!status.canTransitionTo(next)) {
+            throw new IllegalStateException("");
+        }
+
+        this.status = next;
+    }
 }
