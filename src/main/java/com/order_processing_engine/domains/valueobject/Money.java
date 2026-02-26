@@ -1,5 +1,7 @@
 package com.order_processing_engine.domains.valueobject;
 
+import com.order_processing_engine.domains.exceptions.MoneyNotPositiveException;
+
 import java.math.BigDecimal;
 
 public class Money {
@@ -8,7 +10,7 @@ public class Money {
     public Money(BigDecimal value) {
         // Valida se o valor passado é menor do que zero
         if (value.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Valor não pode ser negativo");
+            throw new MoneyNotPositiveException();
         }
 
         this.value = value;
