@@ -15,6 +15,10 @@ public class Order {
     private OrderStatus status;
 
     public Order(UUID id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
+        if (items == null || items.isEmpty()) {
+            throw new IllegalArgumentException("O pedido deve conter pelo menos um item");
+        }
+
         this.id = id;
         this.customer = customer;
         this.items = items;
