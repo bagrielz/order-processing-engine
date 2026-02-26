@@ -1,6 +1,7 @@
 package com.order_processing_engine.domains.valueobject;
 
 import com.order_processing_engine.domains.enums.Uf;
+import com.order_processing_engine.domains.exceptions.NullShippingStateException;
 
 import java.math.BigDecimal;
 
@@ -9,7 +10,7 @@ public class ShippingState {
 
     public ShippingState(Uf value) {
         if (value == null) {
-            throw new IllegalArgumentException("O estado de envio não pode ser nulo");
+            throw new NullShippingStateException();
         }
 
         this.value = value;
