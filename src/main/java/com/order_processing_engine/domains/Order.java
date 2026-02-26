@@ -21,7 +21,7 @@ public class Order {
 
         this.id = id;
         this.customer = customer;
-        this.items = items;
+        this.items =  List.copyOf(items);
         this.shippingState = shippingState;
         this.status = OrderStatus.CREATED;
     }
@@ -42,7 +42,7 @@ public class Order {
         changeStatusTo(OrderStatus.REJECTED);
     }
 
-    public void changeStatusTo(OrderStatus next) {
+    private void changeStatusTo(OrderStatus next) {
         if (!status.canTransitionTo(next)) {
             throw new IllegalStateException("Transição inválida de " + status + " para " + next);
         }
