@@ -1,6 +1,7 @@
 package com.order_processing_engine.domains;
 
 import com.order_processing_engine.domains.enums.OrderStatus;
+import com.order_processing_engine.domains.exceptions.EmptyOrderItemsException;
 import com.order_processing_engine.domains.valueobject.ShippingState;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class Order {
 
     public Order(UUID id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
         if (items == null || items.isEmpty()) {
-            throw new IllegalArgumentException("O pedido deve conter pelo menos um item");
+            throw new EmptyOrderItemsException();
         }
 
         this.id = id;
         this.customer = customer;
-        this.items =  List.copyOf(items);
+        this.items = List.copyOf(items);
         this.shippingState = shippingState;
         this.status = OrderStatus.CREATED;
     }
