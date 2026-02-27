@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class Order {
-    private final UUID id;
+    private final String id;
     private final Customer customer;
     private final List<OrderItem> items;
     private final ShippingState shippingState;
 
     private OrderStatus status;
 
-    public Order(UUID id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
+    public Order(String id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
         if (items == null || items.isEmpty()) {
             throw new EmptyOrderItemsException();
         }
