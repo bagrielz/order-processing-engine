@@ -2,10 +2,10 @@ package com.order_processing_engine.domains;
 
 import com.order_processing_engine.domains.enums.OrderStatus;
 import com.order_processing_engine.domains.exceptions.EmptyOrderItemsException;
+import com.order_processing_engine.domains.exceptions.InvalidStatusTransitionException;
 import com.order_processing_engine.domains.valueobject.ShippingState;
 
 import java.util.List;
-import java.util.UUID;
 
 public class Order {
     private final String id;
@@ -45,7 +45,7 @@ public class Order {
 
     private void changeStatusTo(OrderStatus next) {
         if (!current.canTransitionTo(next)) {
-            throw new IllegalStateException("Transição inválida de " + current + " para " + next);
+            throw new InvalidStatusTransitionException(current, next);
         }
 
         this.current = next;
