@@ -21,6 +21,16 @@ public class Money {
         return new Money(this.value.multiply(BigDecimal.valueOf(quantity)));
     }
 
+    public Money applyPercentageDiscount(BigDecimal percentage) {
+        var discount = value.multiply(percentage);
+        return new Money(value.subtract(discount));
+    }
+
+    public Money applyPercentageIncrease(BigDecimal percentage) {
+        var increase = value.multiply(percentage);
+        return new Money(value.add(increase));
+    }
+
     public BigDecimal getValue() {
         return value;
     }
