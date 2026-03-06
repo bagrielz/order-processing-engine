@@ -13,7 +13,7 @@ public class Order {
     private final List<OrderItem> items;
     private final ShippingState shippingState;
 
-    private OrderStatus status;
+    private OrderStatus current;
 
     public Order(String id, Customer customer, List<OrderItem> items, ShippingState shippingState) {
         if (items == null || items.isEmpty()) {
@@ -24,7 +24,7 @@ public class Order {
         this.customer = customer;
         this.items = List.copyOf(items);
         this.shippingState = shippingState;
-        this.status = OrderStatus.CREATED;
+        this.current = OrderStatus.CREATED;
     }
 
     public void validate() {
@@ -44,10 +44,10 @@ public class Order {
     }
 
     private void changeStatusTo(OrderStatus next) {
-        if (!status.canTransitionTo(next)) {
-            throw new IllegalStateException("Transição inválida de " + status + " para " + next);
+        if (!current.canTransitionTo(next)) {
+            throw new IllegalStateException("Transição inválida de " + current + " para " + next);
         }
 
-        this.status = next;
+        this.current = next;
     }
 }
