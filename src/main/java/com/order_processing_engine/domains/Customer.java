@@ -10,4 +10,8 @@ public class Customer {
         this.name = name;
         this.type = type;
     }
+
+    public CustomerType getType() {
+        return type;
+    }
 }

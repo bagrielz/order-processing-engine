@@ -3,8 +3,10 @@ package com.order_processing_engine.domains;
 import com.order_processing_engine.domains.enums.OrderStatus;
 import com.order_processing_engine.domains.exceptions.EmptyOrderItemsException;
 import com.order_processing_engine.domains.exceptions.InvalidStatusTransitionException;
+import com.order_processing_engine.domains.valueobject.Money;
 import com.order_processing_engine.domains.valueobject.ShippingState;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
@@ -41,6 +43,22 @@ public class Order {
 
     public void reject() {
         changeStatusTo(OrderStatus.REJECTED);
+    }
+
+    public Money totalItemsValue() {
+        return items.stream().map(OrderItem::totalValue).reduce(new Money(BigDecimal.ZERO), Money::add);
+    }
+
+    public Money calculateTotal() {
+        var total = totalItemsValue();
+
+        // Desconto do cliente
+        total = total.applyPercentageDiscount(customer.getType().discountPercentage());
+
+        // Taxa de envio
+        total = total.applyPercentageIncrease(shippingState.uf().shippingTaxPercentage());
+
+        return total;
     }
 
     private void changeStatusTo(OrderStatus next) {

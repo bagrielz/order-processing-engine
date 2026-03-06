@@ -16,6 +16,10 @@ public class Money {
         this.value = value;
     }
 
+    public Money add(Money other) {
+        return new Money(this.value.add(other.value));
+    }
+
     public Money multiply(int quantity) {
         // Multiplica o valor * quantidade com precisão, evitando erros de ponto flutuante
         return new Money(this.value.multiply(BigDecimal.valueOf(quantity)));
