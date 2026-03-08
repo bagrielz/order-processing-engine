@@ -19,8 +19,4 @@ public class ShippingState {
     public BigDecimal shippingTaxPercentage() {
         return value.shippingTaxPercentage();
     }
-
-    public Uf uf() {
-        return value;
-    }
 }

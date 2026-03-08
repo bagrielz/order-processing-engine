@@ -50,15 +50,12 @@ public class Order {
     }
 
     public Money calculateTotal() {
-        var total = totalItemsValue();
+        var customerDiscount = customer.getType().discountPercentage();
+        var shippingTax = shippingState.shippingTaxPercentage();
 
-        // Desconto do cliente
-        total = total.applyPercentageDiscount(customer.getType().discountPercentage());
-
-        // Taxa de envio
-        total = total.applyPercentageIncrease(shippingState.uf().shippingTaxPercentage());
-
-        return total;
+        return totalItemsValue()
+                .applyPercentageDiscount(customerDiscount)
+                .applyPercentageIncrease(shippingTax);
     }
 
     private void changeStatusTo(OrderStatus next) {
